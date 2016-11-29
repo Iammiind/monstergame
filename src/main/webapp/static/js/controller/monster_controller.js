@@ -6,8 +6,6 @@ App.controller('MonsterController', [
 		function($scope, MonsterService) {
 			var self = this;
 
-			self.battleMode = false;
-
 			self.monster = {
 				id : null,
 				monstername : '',
@@ -96,6 +94,7 @@ App.controller('MonsterController', [
 				$scope.myForm.$setPristine(); // reset Form
 			};
 
+			self.battleMode = false;
 			self.monsterBattle = [
 				{
 					id : null
@@ -143,13 +142,40 @@ App.controller('MonsterController', [
 				return false;
 			};
 
+			self.winner = null;
 			self.fightMonster = function() {
-				MonsterService.fightMonster(self.monsterBattle).then(function(d) {
-					self.winner = d
-				}, function(errResponse) {
-					console.error('Error while fetching Monsters');
-				});
+				// finish button
+				if(self.winner) {
+					self.monsterBattle[0] = {
+						id : null
+					};
+					self.monsterBattle[1] = {
+						id : null
+					};
+					self.winner = null;
+				}else {
+					MonsterService.fightMonster(self.monsterBattle).then(function (d) {
+						self.winner = d
+					}, function (errResponse) {
+						console.error('Error while fetching Monsters');
+					});
+				}
 			};
+
+			self.instructions = function(){
+				if(self.monsterBattle[0].id == null){
+					return 'SELECT FIRST MONSTER';
+				}
+				if(self.monsterBattle[1].id == null){
+					return 'SELECT SECOND MONSTER'
+				}
+				if(self.monsterBattle[1].id != null && self.monsterBattle[0] != null && self.winner == null){
+					return 'READY TO FIGHT'
+				}
+				if(self.winner != null){
+					return 'THE WINNER IS '+ self.winner.monstername;
+				}
+			}
 
 
 		} ]);

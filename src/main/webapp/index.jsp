@@ -9,7 +9,7 @@
 		<link href="<c:url value='/static/css/app.css' />" rel="stylesheet">
 	
 </head>
-<body ng-app="myApp" class="ng-cloak" ng-controller="MonsterController as ctrl" ng-class="(ctrl.battleMode)?'battle_bg_color_red':'battle_bg_color_yellow'">
+<body ng-app="myApp" class="ng-cloak" ng-controller="MonsterController as ctrl" ng-class="(ctrl.battleMode)?'battle_bg_color_red':'bg_register_form'">
 
         <!--- wrap --->
         <div class="generic-container my_form_margin_center">
@@ -23,6 +23,12 @@
 
           <!-- select monster -->
             <div class="panel panel-default" ng-hide="!ctrl.battleMode">
+
+                <!-- instruction -->
+                <div class="panel-heading battle_instruction battle_bg_color_softred">
+                    <span ng-bind="ctrl.instructions()"> </span>
+                </div>
+
                 <div class="panel-heading">
                     <span class="lead">Select Monster Form </span>
                 </div>
@@ -35,7 +41,7 @@
                                 <div class="form-group col-md-12">
                                     <label class="col-md-2 control-lable" for="monster1">First Monster</label>
                                     <div class="col-md-7">
-                                        <input type="text" ng-model="ctrl.monsterBattle[0].monstername" class="form-control input-sm" disabled/>
+                                        <input type="text" ng-model="ctrl.monsterBattle[0].monstername" class="form-control input-sm" disabled required/>
                                     </div>
                                 </div>
                             </div>
@@ -45,24 +51,21 @@
                                 <div class="form-group col-md-12">
                                     <label class="col-md-2 control-lable" for="monster2">Second Monster</label>
                                     <div class="col-md-7">
-                                        <input type="text" ng-model="ctrl.monsterBattle[1].monstername" class="form-control input-sm" disabled/>
+                                        <input type="text" ng-model="ctrl.monsterBattle[1].monstername" class="form-control input-sm" disabled required/>
                                     </div>
                                 </div>
                             </div>
 
-
+                            <!--- fight button -->
                             <div class="row">
                                 <div class="form-actions button_fight">
-                                    <button type="button" class="btn btn-sm button_color_purple button_fight" ng-click ="ctrl.fightMonster()">Fight</button>
+                                    <button type="button" class="btn btn-sm button_color_purple button_fight" ng-click ="ctrl.fightMonster()" ng-disabled="selectMonsterForm.$invalid">{{ctrl.winner? 'Finish':'Fight'}}</button>
                                 </div>
-
-                                {{ctrl.winner}}
                             </div>
 
                         </form>
                     </div>
                 </div>
-
 
 
             <!-- form create monster -->
@@ -161,8 +164,8 @@
 
                                     <!-- select button -->
                                     <div ng-hide="!ctrl.battleMode" >
-                                        <button type="button" ng-click="ctrl.selectedMonster(m)" class="btn custom-width button_color_yellow" ng-disabled="ctrl.isSelected(m.id)">Select</button>
-                                        <button type="button" ng-click="ctrl.unselectedMonster(m)" class="btn custom-width button_color_greensea" ng-disabled="!ctrl.isSelected(m.id)">UnSelect</button>
+                                        <button type="button" ng-click="ctrl.selectedMonster(m)" class="btn custom-width button_color_yellow" ng-disabled="ctrl.isSelected(m.id) || ctrl.winner" >Select</button>
+                                        <button type="button" ng-click="ctrl.unselectedMonster(m)" class="btn custom-width button_color_greensea" ng-disabled="!ctrl.isSelected(m.id) || ctrl.winner">UnSelect</button>
                                     </div>
 
                                 </td>

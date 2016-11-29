@@ -92,7 +92,7 @@ body, .form-control{
  			form
 \********************************/
 .my_form_margin_center {
-	margin: 0 auto;
+	margin: auto;
 }
 
 
@@ -102,9 +102,6 @@ body, .form-control{
 
 .battle_bg_color_red {
 	background-color: #EF5350;
-}
-.battle_bg_color_yellow {
-	background-color: yellow;
 }
 .button_color_yellow {
 	background-color: #FFB300;
@@ -121,4 +118,16 @@ body, .form-control{
 .button_fight {
 	width: 90%;
 	margin: 0 5%;
+}
+.bg_register_form {
+	background-image: url("monster2.jpg");
+	background-repeat: repeat;
+}
+.battle_instruction {
+	font-family: Chalkduster;
+	font-size: 30px;
+	text-align: center
+}
+.battle_bg_color_softred{
+	background-color: #DAE8E8 !important;
 }
