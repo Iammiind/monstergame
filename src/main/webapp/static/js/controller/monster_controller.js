@@ -175,7 +175,7 @@ App.controller('MonsterController', [
 				if(self.winner != null){
 					return 'THE WINNER IS '+ self.winner.monstername;
 				}
-			}
+			};
 
 
 		} ]);

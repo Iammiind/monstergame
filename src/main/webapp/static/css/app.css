@@ -88,17 +88,9 @@ body, .form-control{
  			myStyle
 \********************************/
 
-/********************************\
- 			form
-\********************************/
 .my_form_margin_center {
 	margin: auto;
 }
-
-
-/********************************\
- 			button
-\********************************/
 
 .battle_bg_color_red {
 	background-color: #EF5350;
@@ -131,3 +123,4 @@ body, .form-control{
 .battle_bg_color_softred{
 	background-color: #DAE8E8 !important;
 }
+
